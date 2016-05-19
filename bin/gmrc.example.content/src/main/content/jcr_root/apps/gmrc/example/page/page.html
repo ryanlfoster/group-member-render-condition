@@ -1,0 +1,64 @@
+Open up page properties to see the Member of Render Condition in action.
+<pre>Code looks like this:
+	<code>
+&lt;column jcr:primaryType="nt:unstructured"
+	sling:resourceType="granite/ui/components/foundation/container"&gt;
+	&lt;items jcr:primaryType="nt:unstructured"&gt;
+		&lt;section
+			sling:resourceType="granite/ui/components/foundation/section"&gt;
+			&lt;layout jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/foundation/layouts/well" /&gt;
+			&lt;items jcr:primaryType="nt:unstructured"&gt;
+				&lt;text cq:showOnCreate="{Boolean}true"
+					jcr:primaryType="nt:unstructured"
+					sling:resourceType="granite/ui/components/foundation/text"
+					text="this text will render for [everyone]. Render condition applied to containing granite/ui/components/foundation/section node."&gt;
+				&lt;/text&gt;
+			&lt;/items&gt;
+
+			&lt;rendercondition jcr:primaryType="nt:unstructured"
+				sling:resourceType="gmrc/groupmember"
+				declaredOnly="false"
+				groupID="[everyone]" /&gt;
+				
+		&lt;/section&gt;
+		&lt;section2
+			sling:resourceType="granite/ui/components/foundation/section"&gt;
+			&lt;layout jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/foundation/layouts/well" /&gt;
+			&lt;items jcr:primaryType="nt:unstructured"&gt;
+				&lt;text cq:showOnCreate="{Boolean}true"
+					jcr:primaryType="nt:unstructured"
+					sling:resourceType="granite/ui/components/foundation/text"
+					text="this text will render only for [administrators]. Render condition applied to this granite/ui/components/foundation/text node."&gt;
+					
+					&lt;rendercondition jcr:primaryType="nt:unstructured"
+						sling:resourceType="gmrc/groupmember"
+						declaredOnly="false"
+						groupID="[administrators]" /&gt;
+					
+				&lt;/text&gt;
+			&lt;/items&gt;
+		&lt;/section2&gt;
+		&lt;section3
+			sling:resourceType="granite/ui/components/foundation/section"&gt;
+			&lt;layout jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/foundation/layouts/well" /&gt;
+			&lt;items jcr:primaryType="nt:unstructured"&gt;
+				&lt;text cq:showOnCreate="{Boolean}true"
+					jcr:primaryType="nt:unstructured"
+					sling:resourceType="granite/ui/components/foundation/text"
+					text="this text will render only for [somenonexistantgroup] (probably no one!)"&gt;
+					
+					&lt;rendercondition jcr:primaryType="nt:unstructured"
+						sling:resourceType="gmrc/groupmember"
+						declaredOnly="false"
+						groupID="[somenonexistantgroup]" /&gt;
+						
+				&lt;/text&gt;
+			&lt;/items&gt;
+		&lt;/section3&gt;
+	&lt;/items&gt;
+&lt;/column&gt;
+	</code>
+</pre>
