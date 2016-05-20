@@ -2,44 +2,14 @@
   by Ben Stockwell
      http://scrupulo.com
      https://github.com/scrupulo/group-member-render-condition
-     %><%
+--%><%
 %><%@include file="/libs/granite/ui/global.jsp" %><%
 %><%@page session="false"
           import="org.apache.sling.api.resource.ResourceResolver,
                   com.adobe.granite.ui.components.Config,
                   org.apache.jackrabbit.api.security.user.UserManager,
                   com.aem.community.gmrc.core.MemberOfRenderCondition,
-                  com.adobe.granite.ui.components.rendercondition.RenderCondition" %><%--###
-Privilege
-=========
-
-   .. granite:servercomponent: /apps/gmrc/groupmember
-   :rendercondition:
-   
-   returns true is user is member of group
-   
-   It has the following content structure:
-
-   .. gnd:gnd::
-
-      [granite:RenderConditionsPrivilege]
-      
-      /**
-       * The Authorizable ID -- optional -- defaults to remote user from request
-       */
-      - authorizableID (StringEL)
-      
-      /**
-       * The Group names.
-       */
-      - groupID (String) multiple
-      
-      /**
-       * Declared memberships (not transitive) only
-       */
-      - declaredOnly (Boolean) 
-
-###--%><%
+                  com.adobe.granite.ui.components.rendercondition.RenderCondition" %><%
 
 Config cfg = cmp.getConfig();
 
