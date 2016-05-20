@@ -1,7 +1,7 @@
 Group Member Render Condition
 =============================
 
-A Maven package for AEM 6.2 that adds a render condition to check if a given user is in at least one of a list of groups before rendering a component.
+A Maven package for AEM 6.2 that adds a [render condition] to check if a given user is in at least one of a list of groups before rendering a component.
 
 [Github Repo]
 
@@ -27,11 +27,14 @@ Usage
 
 Use on any granite element that supports &lt;renderconditions /&gt;:
 
-            <rendercondition jcr:primaryType="nt:unstructured"
-                sling:resourceType="gmrc/groupmember"
-                groupID="[group1,group2,group3]"
-                declaredOnly="true|false (optional)"
-                authorizableID="someID (optional)" />        
+    + mybutton
+      - sling:resourceType = "granite/ui/components/coral/foundation/button"
+      - text = "MyButton"
+      + granite:rendercondition
+        - sling:resourceType = "gmrc/groupmember"
+        - groupID = "[group1,group2,group3]"
+        - declaredOnly=true|fasle (optional)"
+        - authorizableID="someID (optional)"
 
 groupID allows for multiple groups to be tested for membership, which is essentially a shortcut for using [built-in OR conditions] with several of these render conditions, if you require a user to be members of multiple groups, use the [built-in AND contitions.]
 
@@ -115,6 +118,7 @@ This is released with absolutely no License, use at your own risk.
 
   [Ben Stockwell]: http://scrupulo.com
 
+  [render condition]: https://docs.adobe.com/docs/en/aem/6-2/develop/ref/granite-ui/api/jcr_root/libs/granite/ui/docs/server/rendercondition.html
   [Github Repo]: https://github.com/scrupulo/group-member-render-condition
   [built-in OR conditions]: https://docs.adobe.com/docs/en/aem/6-1/ref/granite-ui/api/jcr_root/libs/granite/ui/components/foundation/renderconditions/or/index.html
   [built-in AND contitions.]: https://docs.adobe.com/docs/en/aem/6-1/ref/granite-ui/api/jcr_root/libs/granite/ui/components/foundation/renderconditions/and/index.html
