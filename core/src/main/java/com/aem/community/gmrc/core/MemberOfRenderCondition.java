@@ -13,6 +13,14 @@ import org.slf4j.LoggerFactory;
 
 import com.adobe.granite.ui.components.rendercondition.RenderCondition;
 
+
+/**
+* A class for checking if a user is in a group, best when used with a render condition.
+*
+* @author  Ben Stockwell
+* @version 1.0
+* @since   2016-6-20
+*/
 public class MemberOfRenderCondition implements RenderCondition {
 	
 	String authorizableID;
