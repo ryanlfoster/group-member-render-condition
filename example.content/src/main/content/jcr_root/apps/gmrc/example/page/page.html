@@ -60,5 +60,17 @@ Open up page properties to see the Member of Render Condition in action.
 		&lt;/section3&gt;
 	&lt;/items&gt;
 &lt;/column&gt;
+
+
+Use it like this on any element that supports <renderconditions>
+
+            &lt;rendercondition jcr:primaryType="nt:unstructured"
+                sling:resourceType="gmrc/groupmember"
+                declaredOnly="true|false"
+                groupID="[group1,group2,group3]" 
+                authorizableID="someID" /&gt;
+                        
+note: authorizableID is optional and defaults to resourceResovler.getRemoteUser() if left blank.
+
 	</code>
 </pre>

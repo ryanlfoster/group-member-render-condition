@@ -23,6 +23,7 @@
 	<description>Installs example content to demonstrate new render condition.</description>
 
 
+	
 	<!-- ====================================================================== -->
 	<!-- B U I L D D E F I N I T I O N -->
 	<!-- ====================================================================== -->
@@ -58,6 +59,7 @@
 				in the plugin (mainly the filters). copy the resource explicitly instead 
 				of attaching it to the default resources -->
 			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<!-- ensure that the empty directories are copied -->
 				<configuration>
@@ -95,7 +97,7 @@
 					<filterSource>${basedir}/META-INF/vault/filter.xml</filterSource>
 					<verbose>true</verbose>
 					<failOnError>true</failOnError>
-					<group>GMRC Content Package</group>
+					<group>GMRC Apps Package</group>
 					<embeddeds>
 						<embedded>
 							<groupId>com.aem.community</groupId>
@@ -113,9 +115,7 @@
 	<!-- ====================================================================== -->
 	<profiles>
 		<profile>
-			<id>autoInstallPackage</id>
-			<activation>
-			</activation>
+			<id>autoInstallExample</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -123,40 +123,14 @@
 						<artifactId>content-package-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>install-package</id>
+								<id>install-content</id>
 								<goals>
-									<goal>install</goal>
+										<goal>install</goal>
 								</goals>
 							</execution>
 						</executions>
 						<configuration>
 							<targetURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</targetURL>
-							<failOnError>true</failOnError>
-							<failOnMissingEmbed>true</failOnMissingEmbed>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>autoInstallPackagePublish</id>
-			<activation>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.day.jcr.vault</groupId>
-						<artifactId>content-package-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>install-package</id>
-								<goals>
-									<goal>install</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<targetURL>http://${aem.publish.host}:${aem.publish.port}/crx/packmgr/service.jsp</targetURL>
 							<failOnError>true</failOnError>
 							<failOnMissingEmbed>true</failOnMissingEmbed>
 						</configuration>

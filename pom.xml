@@ -10,8 +10,8 @@
 
 	<modules>
 		<module>core</module>
-		<module>gmrc.ui.apps</module>
-		<module>gmrc.example.content</module>
+		<module>apps</module>
+		<module>example.content</module>
 	</modules>
 
 	<properties>
@@ -115,36 +115,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.2</version>
-				</plugin>
-				<!-- Apache Felix SCR Plugin -->
-				<plugin>
-					<groupId>org.apache.felix</groupId>
-					<artifactId>maven-scr-plugin</artifactId>
-					<version>1.20.0</version>
-					<executions>
-						<execution>
-							<id>generate-scr-scrdescriptor</id>
-							<goals>
-								<goal>scr</goal>
-							</goals>
-							<configuration>
-								<!-- Private service properties for all services. -->
-								<properties>
-									<service.vendor>University of Cincinnati</service.vendor>
-								</properties>
-							</configuration>
-						</execution>
-					</executions>
-					<configuration>
-						<outputDirectory>${project.build.directory}/classes</outputDirectory>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.slf4j</groupId>
-							<artifactId>slf4j-simple</artifactId>
-							<version>1.5.11</version>
-						</dependency>
-					</dependencies>
 				</plugin>
 				<!-- Maven Installer Plugin -->
 				<plugin>
@@ -290,56 +260,11 @@
 		<!-- ====================================================== -->
 		<!-- A D O B E P U B L I C P R O F I L E -->
 		<!-- ====================================================== -->
-		<profile>
-			<id>adobe-public</id>
 
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-
-			<properties>
-				<releaseRepository-Id>adobe-public-releases</releaseRepository-Id>
-				<releaseRepository-Name>Adobe Public Releases</releaseRepository-Name>
-				<releaseRepository-URL>https://repo.adobe.com/nexus/content/groups/public</releaseRepository-URL>
-			</properties>
-
-			<repositories>
-				<repository>
-					<id>adobe-public-releases</id>
-					<name>Adobe Public Repository</name>
-					<url>https://repo.adobe.com/nexus/content/groups/public</url>
-					<releases>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</repository>
-			</repositories>
-
-			<pluginRepositories>
-				<pluginRepository>
-					<id>adobe-public-releases</id>
-					<name>Adobe Public Repository</name>
-					<url>https://repo.adobe.com/nexus/content/groups/public</url>
-					<releases>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
 
 		<!-- Development profile: install only the bundle -->
 		<profile>
 			<id>autoInstallBundle</id>
-			<!-- To enable this feature for a bundle, the maven-sling-plugin (without 
-				configuration) needs to be included: <plugin> <groupId>org.apache.sling</groupId> 
-				<artifactId>maven-sling-plugin</artifactId> </plugin> -->
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -361,7 +286,7 @@
 										<!-- This is typically the case when ui.apps is deployed first -->
 										<!-- Otherwise, create /apps/${appsFolderName}/install manually 
 											(CRXDE|Lite) -->
-										<slingUrlSuffix>/apps/uc/news/install/</slingUrlSuffix>
+										<slingUrlSuffix>/apps/gmrc/install/</slingUrlSuffix>
 									</configuration>
 								</execution>
 							</executions>
@@ -370,63 +295,6 @@
 				</pluginManagement>
 			</build>
 		</profile>
-
-		<profile>
-			<id>autoInstallPackage</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>com.day.jcr.vault</groupId>
-							<artifactId>content-package-maven-plugin</artifactId>
-							<executions>
-								<execution>
-									<id>install-package</id>
-									<goals>
-										<goal>install</goal>
-									</goals>
-									<configuration>
-										<targetURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</targetURL>
-									</configuration>
-								</execution>
-							</executions>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-
-		<profile>
-			<id>autoInstallPackagePublish</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>com.day.jcr.vault</groupId>
-							<artifactId>content-package-maven-plugin</artifactId>
-							<executions>
-								<execution>
-									<id>install-package-publish</id>
-									<goals>
-										<goal>install</goal>
-									</goals>
-									<configuration>
-										<targetURL>http://${aem.publish.host}:${aem.publish.port}/crx/packmgr/service.jsp</targetURL>
-									</configuration>
-								</execution>
-							</executions>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-
 	</profiles>
 
 	<!-- ====================================================================== -->
@@ -435,30 +303,7 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- OSGi Dependencies -->
-			<dependency>
-				<groupId>org.osgi</groupId>
-				<artifactId>org.osgi.core</artifactId>
-				<version>4.2.0</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.osgi</groupId>
-				<artifactId>org.osgi.compendium</artifactId>
-				<version>4.2.0</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>org.apache.felix.scr.</artifactId>
-				<version>1.9.8</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>org.apache.felix.scr.annotations</artifactId>
-				<version>1.9.8</version>
-				<scope>provided</scope>
-			</dependency>
+
 			<dependency>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>annotation</artifactId>
@@ -484,18 +329,6 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
-				<groupId>commons-codec</groupId>
-				<artifactId>commons-codec</artifactId>
-				<version>1.5</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>2.4</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
 				<groupId>com.day.commons</groupId>
 				<artifactId>day-commons-jstl</artifactId>
 				<version>1.1.4</version>
@@ -513,18 +346,7 @@
 				<version>2.0</version>
 				<scope>provided</scope>
 			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.11</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>junit-addons</groupId>
-				<artifactId>junit-addons</artifactId>
-				<version>1.4</version>
-				<scope>test</scope>
-			</dependency>
+
 			<dependency>
 				<groupId>com.adobe.aem</groupId>
 				<artifactId>uber-jar</artifactId>
@@ -562,11 +384,7 @@
 				<version>2.8.0</version>
 				<scope>provided</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.sling</groupId>
-				<artifactId>adapter-annotations</artifactId>
-				<version>1.0.0</version>
-			</dependency>
+
 			<dependency>
 				<groupId>com.google.code.findbugs</groupId>
 				<artifactId>jsr305</artifactId>
@@ -578,28 +396,33 @@
 				<artifactId>jackrabbit-api</artifactId>
 				<version>2.5.2</version>
 			</dependency>
-			<dependency>
-				<groupId>javax.inject</groupId>
-				<artifactId>javax.inject</artifactId>
-				<version>1</version>
-				<scope>provided</scope>
-			</dependency>
+
 			<dependency>
 				<groupId>com.day.cq</groupId>
 				<artifactId>cq-commons</artifactId>
 				<version>5.9.22</version>
 				<scope>provided</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.sling</groupId>
-				<artifactId>org.apache.sling.models.api</artifactId>
-				<version>1.2.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.sling</groupId>
-				<artifactId>org.apache.sling.models.impl</artifactId>
-				<version>1.2.2</version>
-			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
+    
+     <repositories>
+        <repository>
+            <id>adobe-public-releases</id>
+            <name>Adobe Public Repository</name>
+            <url>https://repo.adobe.com/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>adobe-public-releases</id>
+            <name>Adobe Public Repository</name>
+            <url>https://repo.adobe.com/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
+
+    
 </project>

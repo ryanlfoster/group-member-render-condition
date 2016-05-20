@@ -66,6 +66,7 @@
 				in the plugin (mainly the filters). copy the resource explicitly instead 
 				of attaching it to the default resources -->
 			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<!-- ensure that the empty directories are copied -->
 				<configuration>
@@ -120,10 +121,8 @@
 	<!-- P R O F I L E S -->
 	<!-- ====================================================================== -->
 	<profiles>
-		<profile>
+        <profile>
 			<id>autoInstallPackage</id>
-			<activation>
-			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -147,9 +146,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>autoInstallPackagePublish</id>
-			<activation>
-			</activation>
+			<id>autoInstallExample</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -164,7 +161,7 @@
 							</execution>
 						</executions>
 						<configuration>
-							<targetURL>http://${aem.publish.host}:${aem.publish.port}/crx/packmgr/service.jsp</targetURL>
+							<targetURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</targetURL>
 							<failOnError>true</failOnError>
 							<failOnMissingEmbed>true</failOnMissingEmbed>
 						</configuration>
