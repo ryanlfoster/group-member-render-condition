@@ -18,7 +18,7 @@ To Install
 ### Installed files:
 
 -   /jcr:root/apps/gmrc/groupmember – jsp file to be referenced in Granite markup
--   com.aem.community.gmrc.core.MemberOfRenderCondition – Java class containing to test for the group membership, called from groupmember.jsp
+-   com.aem.community.gmrc.core.MemberOfRenderCondition – Java class containing code to test for the group membership, called from groupmember.jsp
 -   /jcr:root/apps/gmrc/example (example profile only)
 -   /jcr:root/content/gmrc (example profile only)
 

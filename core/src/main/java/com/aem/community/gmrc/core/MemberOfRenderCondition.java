@@ -51,15 +51,13 @@ public class MemberOfRenderCondition implements RenderCondition {
 			while(ig.hasNext()) {
 				Group g = ig.next();
 				for(String s : groups) {
-					log.error(s);
-					log.error(g.getID());
 					if(g.getID().equals(s.trim())) {
 						return true;
 					}
 				}
 			}
 		} catch (RepositoryException e) {
-			log.error("error",e);
+			log.error("MemberOfRenderCondition error",e);
 			return false;
 		}
 
