@@ -109,9 +109,9 @@ About
 
 By [Ben Stockwell] – May 2016
 
-### Lisence and Liability:
+### License and Liability:
 
-This is released with absolutely no lisence, use at your own risk.
+This is released with absolutely no License, use at your own risk.
 
   [Ben Stockwell]: http://scrupulo.com
 

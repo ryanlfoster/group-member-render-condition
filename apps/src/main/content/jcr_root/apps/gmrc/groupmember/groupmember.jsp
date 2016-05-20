@@ -48,7 +48,7 @@ Privilege
       /**
        * Declared memberships (not transitive) only
        */
-      - declaredOnly (Boolean)
+      - declaredOnly (Boolean) 
 
 ###--%><%
 
@@ -56,8 +56,7 @@ Config cfg = cmp.getConfig();
 
 String authorizable = cmp.getExpressionHelper().getString(cfg.get("authorizableID", request.getRemoteUser()));
 String[] groups = cfg.get("groupID", new String[0]);
-boolean declaredOnly = cfg.get("declaredOnly", false);]);
-boolean all = cfg.get("all", false);
+boolean declaredOnly = cfg.get("declaredOnly", false);
 
 if (authorizable.length() == 0 || groups.length == 0) {
     return;
