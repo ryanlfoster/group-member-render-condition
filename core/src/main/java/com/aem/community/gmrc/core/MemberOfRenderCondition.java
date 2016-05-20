@@ -18,6 +18,8 @@ public class MemberOfRenderCondition implements RenderCondition {
 	String authorizableID;
 	String[] groups;
 	boolean declaredOnly;
+	boolean all;
+    
 	UserManager userManager;
 
     private static final Logger log = LoggerFactory.getLogger(MemberOfRenderCondition.class);

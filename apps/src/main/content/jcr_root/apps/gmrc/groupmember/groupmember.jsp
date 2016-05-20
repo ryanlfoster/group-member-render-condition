@@ -24,7 +24,7 @@
 Privilege
 =========
 
-   .. granite:servercomponent:: /apps/gmrc/groupmember
+   .. granite:servercomponent: /apps/gmrc/groupmember
    :rendercondition:
    
    returns true is user is member of group
@@ -45,11 +45,10 @@ Privilege
        */
       - groupID (String) multiple
       
-      
       /**
        * Declared memberships (not transitive) only
        */
-      - declaredOnly (Boolean) 
+      - declaredOnly (Boolean)
 
 ###--%><%
 
@@ -57,7 +56,8 @@ Config cfg = cmp.getConfig();
 
 String authorizable = cmp.getExpressionHelper().getString(cfg.get("authorizableID", request.getRemoteUser()));
 String[] groups = cfg.get("groupID", new String[0]);
-boolean declaredOnly = cfg.get("declaredOnly", false);
+boolean declaredOnly = cfg.get("declaredOnly", false);]);
+boolean all = cfg.get("all", false);
 
 if (authorizable.length() == 0 || groups.length == 0) {
     return;
