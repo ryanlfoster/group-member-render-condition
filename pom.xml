@@ -5,13 +5,12 @@
   <artifactId>gmrc</artifactId>
   <packaging>pom</packaging>
   <version>1.0</version>
-  <name>gmrc</name>
+  <name>Group Member Render Condition</name>
   <description>Group Member Render Condition (with examples) for AEM 6	</description>
 
 	<modules>
 		<module>core</module>
 		<module>apps</module>
-		<module>example.content</module>
 	</modules>
 
 	<properties>
@@ -295,6 +294,41 @@
 				</pluginManagement>
 			</build>
 		</profile>
+        <profile>
+			<id>autoInstallExample</id>
+            <modules>
+                <module>example.content</module>
+            </modules>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.sling</groupId>
+							<artifactId>maven-sling-plugin</artifactId>
+							<executions>
+								<execution>
+									<id>install-bundle</id>
+									<goals>
+										<goal>install</goal>
+									</goals>
+									<configuration>
+										<!-- Note that this requires /apps/${appsFolderName}/install to 
+											exist!! -->
+										<!-- This is typically the case when ui.apps is deployed first -->
+										<!-- Otherwise, create /apps/${appsFolderName}/install manually 
+											(CRXDE|Lite) -->
+										<slingUrlSuffix>/apps/gmrc/install/</slingUrlSuffix>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+        </profile>
 	</profiles>
 
 	<!-- ====================================================================== -->
